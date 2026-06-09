@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Env / secrets
+.env
+backend/.env
+
+# Data
+backend/data/*.db
+backend/data/*.sqlite
+backend/data/*.sqlite3
+
+# Logs
+*.log
+backend_err.log
+backend_out.log
+logs/
+
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env.local
+npm-debug.log*
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+***REMOVED*** local session data
+
