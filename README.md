@@ -4,9 +4,9 @@
 
 <br/>
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Now-17ABDA?style=for-the-badge&labelColor=001E3C)](https://skillsync-ai.capgemini-demo.placeholder.io)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Now-17ABDA?style=for-the-badge&labelColor=001E3C)](https://skillsync-ai.placeholder.io)
 [![Documentation](https://img.shields.io/badge/Docs-Read%20Here-0070AD?style=for-the-badge&labelColor=001E3C)](#table-of-contents)
-[![Report Bug](https://img.shields.io/badge/Bug-Report%20Issue-FF6B6B?style=for-the-badge&labelColor=001E3C)](https://github.com/Monisha-1508/Capegemini_Skillsync/issues)
+[![Report Bug](https://img.shields.io/badge/Bug-Report%20Issue-FF6B6B?style=for-the-badge&labelColor=001E3C)](https://github.com/Monisha-1508/SKILLSYNC_AI/issues)
 
 <br/>
 
@@ -36,7 +36,7 @@
 <details open>
 <summary><strong>Expand</strong></summary>
 
-- [About the Project](#about-the-project)
+- [About](#about)
 - [Features](#features)
 - [System Architecture](#system-architecture)
 - [The Six Agents](#the-six-agents)
@@ -56,19 +56,19 @@
 
 ---
 
-## About the Project
+## About
 
-SkillSync AI is a multi-agent placement prep platform built for the Capgemini Hackathon 2026 (AI-Assisted Learning track). You fill in a short intake form - your target role, current skill levels, weekly hours, and deadline - and the system runs six specialised agents in sequence to build a personalised week-by-week study plan.
+SkillSync AI is a multi-agent placement prep platform built for the Capgemini Hackathon 2026 (AI-Assisted Learning track). Fill in a short intake form - target role, current skill levels, weekly hours, deadline - and six specialised agents run in sequence to build a personalised week-by-week study plan.
 
-What makes it different from a generic learning site is that every agent decision is logged and streamed live to the screen. You can see the gap analysis as it runs, watch the roadmap get built, and read the validator's sign-off before you ever start studying. The plan is accountable, not just convenient.
+Every agent decision is logged and streamed live to the screen during onboarding. You can watch the gap analysis run, see the roadmap being built, and read the validator's sign-off before you start studying. Nothing happens in a black box.
 
-The three main things it does:
+Three things it does well:
 
-- **Skill gap analysis** - maps your self-rated skills against what the target role actually needs, using a 41-node graph with an India placement overlay
-- **Three-variant roadmap** - generates Safe, Target, and Stretch plans sized to your real available hours, not an assumed 40-hour week
-- **Proctored checkpoints + mock interviews** - weekly MCQ tests and role-specific interview rounds, both with anti-cheat measures
+- **Skill gap analysis** - maps self-rated skills against what the target role needs, using a 41-node graph with an India placement overlay
+- **Three-variant roadmap** - generates Safe, Target, and Stretch plans sized to real available hours, not a generic 40-hour week
+- **Proctored checkpoints and mock interviews** - weekly MCQ tests and role-specific interview rounds, both with anti-cheat measures baked in
 
-A demo account is seeded automatically so you can explore the full dashboard without going through onboarding.
+A demo account seeds automatically so you can explore the full dashboard without going through onboarding.
 
 ---
 
@@ -76,18 +76,18 @@ A demo account is seeded automatically so you can explore the full dashboard wit
 
 | Feature | What it does |
 |:---|:---|
-| Skill Gap Map | Radar chart across 41 skills, splits them into covered / developing / gap / unknown |
-| Three-Variant Roadmap | Safe, Target, Stretch - each with a feasibility score based on your actual hours |
-| Curated Resources | Trust-scored corpus, locked by week, respects free vs paid preference |
-| FSRS Revision Deck | Spaced-repetition flashcards using FSRS-4.5 - cards surface when due, not randomly |
+| Skill Gap Map | Radar chart across 41 skills - covered, developing, gap, unknown buckets |
+| Three-Variant Roadmap | Safe, Target, Stretch - feasibility score per variant based on actual hours |
+| Curated Resources | Trust-scored corpus locked by week, respects free vs paid preference |
+| FSRS Revision Deck | Spaced-repetition flashcards using FSRS-4.5 - cards surface when due |
 | Proctored Checkpoints | MCQ tests per week, copy-paste and tab-switch detection built in |
-| Mock Interviews | Role-specific question banks, rubric grading, per-section breakdown |
-| Dynamic Reflow | Missed weeks get merged forward automatically so the plan stays usable |
-| Learning Recovery | If you fail a checkpoint twice, a recovery micro-evaluation kicks in |
-| Gamification | Points, levels, and badges derived from actual logged progress |
-| Deadline Alerts | Banner fires when your logged pace trails what the deadline needs |
-| Audit Trail | Every agent step logged with confidence score, streamed live during onboarding |
-| Validation Sign-off | Separate validator agent runs 5 checks on the plan before it reaches you |
+| Mock Interviews | Role-specific question banks per company drive, rubric grading |
+| Dynamic Reflow | Missed weeks merge forward automatically so the plan stays usable |
+| Learning Recovery | Fail a checkpoint twice and a recovery micro-evaluation kicks in |
+| Gamification | Points, levels, and badges from actual logged progress |
+| Deadline Alerts | Banner fires when logged pace trails what the deadline needs |
+| Audit Trail | Every agent step logged with confidence score, streamed live |
+| Validation Sign-off | Separate validator agent runs 5 checks before the plan reaches you |
 
 ---
 
@@ -103,15 +103,15 @@ graph TB
     end
 
     subgraph GATEWAY["FastAPI Backend - Python 3.11"]
-        AUTH[Auth Router - JWT + BCrypt]
-        PROF[Profiles Router - Intake + Personas]
-        DASH[Dashboard Router - Aggregated View]
-        RM[Roadmap Router - Select, Progress, Reflow]
-        WT[Weekly Test Router - Board, Start, Answer]
-        REV[Revision Router - Deck + Review]
-        INT[Interview Router - Start + Answer]
-        REC[Recovery Router - Status, Start, Answer]
-        EXP[Explain Router - Skill, Resource, Replan]
+        AUTH[Auth Router]
+        PROF[Profiles Router]
+        DASH[Dashboard Router]
+        RM[Roadmap Router]
+        WT[Weekly Test Router]
+        REV[Revision Router]
+        INT[Interview Router]
+        REC[Recovery Router]
+        EXP[Explain Router]
     end
 
     subgraph PIPELINE["LangGraph Agent Pipeline"]
@@ -126,8 +126,9 @@ graph TB
 
     subgraph DATA["Data Layer"]
         DB2[(SQLite / Postgres)]
-        GRAPH[Skill Graph - 41 nodes, 6 families]
-        RBANK[Resource Bank - trust-scored]
+        GRAPH[Skill Graph - 41 nodes]
+        RBANK[Resource Bank]
+        DBANK[Drive Banks - 4 companies]
         OTEL[OpenTelemetry]
     end
 
@@ -148,12 +149,12 @@ graph TB
 
 ```mermaid
 graph LR
-    A["Profiling\n─────────────\nMaps self-ratings onto\n41-node skill graph\nInfers gaps via proximity"]
-    B["Roadmap Architect\n─────────────\nBuilds Safe, Target,\nStretch plans sized\nto available hours"]
-    C["Resource Curator\n─────────────\nTrust-scores resources\non 5 factors, enforces\n0.55 trust floor"]
-    D["Coach\n─────────────\nWatches engagement\nsignals, proposes\nre-plans when pace slips"]
-    E["Validator\n─────────────\n5 independent checks\nbefore the plan\nreaches the learner"]
-    F["Interviewer\n─────────────\nRole-specific Q banks\nrubric grading\nanti-cheat proctoring"]
+    A["Profiling\n─────────\nMaps self-ratings onto\n41-node skill graph\nInfers gaps via proximity"]
+    B["Roadmap Architect\n─────────\nBuilds Safe, Target,\nStretch plans sized\nto available hours"]
+    C["Resource Curator\n─────────\nTrust-scores resources\non 5 factors, enforces\n0.55 trust floor"]
+    D["Coach\n─────────\nWatches engagement\nsignals, proposes\nre-plans when pace slips"]
+    E["Validator\n─────────\n5 independent checks\nbefore the plan\nreaches the learner"]
+    F["Interviewer\n─────────\nCompany drive Q banks\nrubric grading\nanti-cheat proctoring"]
 
     A --> B --> C --> D --> E
     D -.->|replan loop| B
@@ -170,42 +171,42 @@ graph LR
 <details>
 <summary><strong>Profiling Agent</strong></summary>
 
-Takes the learner's self-ratings across 41 skill nodes (grouped into 6 families) and builds a gap map. Nodes the learner didn't rate are inferred from graph proximity. Output is a set of covered / developing / gap / unknown buckets plus a confidence score that drives the responsible AI disclosure shown on the dashboard.
+Takes learner self-ratings across 41 skill nodes grouped into 6 families and builds a gap map. Unrated nodes are inferred from graph proximity using `skill_chains.py`. Output is covered / developing / gap / unknown buckets plus a confidence score that drives the responsible AI disclosure shown on the dashboard.
 
 </details>
 
 <details>
 <summary><strong>Roadmap Architect</strong></summary>
 
-Reads the gap map and target role, then drafts three variants. Each variant gets a feasibility score calculated from hours available vs hours estimated. Prerequisites are always sequenced before dependents. Blackout weeks are marked. Supports re-planning mid-run if the Coach flags a pace issue.
+Reads the gap map and target role, then drafts three variants using the feasibility engine in `feasibility.py`. Each variant gets a score calculated from hours available vs hours needed. Prerequisites are always sequenced before dependents. Blackout weeks are marked. Supports re-planning mid-run when the Coach flags a pace issue.
 
 </details>
 
 <details>
 <summary><strong>Resource Curator</strong></summary>
 
-Scores resources against a 5-factor formula: authority, recency, depth, free-access flag, and community signal. Anything below 0.55 is excluded. Resources are locked to the week they become available based on roadmap state, and the free vs paid preference set at intake is respected.
+Scores resources from `resource_bank.py` against a 5-factor trust formula. Anything below 0.55 is excluded. Resources lock to the week they become available based on roadmap state. Free vs paid preference set at intake is respected throughout.
 
 </details>
 
 <details>
 <summary><strong>Coach</strong></summary>
 
-Reads completion rate, quiz scores, and streak data. When pace trails the runway by a configurable threshold, it proposes a re-plan. The learner approves or rejects it before anything changes. Also drives the reflow engine when a week gets logged as missed.
+Reads completion rate, quiz scores, and streak data. Proposes a re-plan when pace trails the runway by a configurable threshold. The learner approves or rejects before anything changes. Also drives the reflow engine when a week is logged as missed.
 
 </details>
 
 <details>
 <summary><strong>Validator</strong></summary>
 
-Runs independently after the rest of the pipeline. Checks: resource trust floor, prerequisite ordering, feasibility margin, skill coverage, and plan completeness. Produces an overall pass / flagged status that appears on the dashboard and is logged with a timestamp.
+Runs independently after the pipeline. Five checks: resource trust floor, prerequisite ordering, feasibility margin, skill coverage, plan completeness. Produces overall pass / flagged status logged with a timestamp and surfaced in its own dashboard tab.
 
 </details>
 
 <details>
 <summary><strong>Interviewer</strong></summary>
 
-Maintains role-specific question banks across 4 interview drives, with 20 questions per round. Supports MCQ and open-ended types. Grades on a per-dimension rubric and produces section breakdowns and drive benchmarks after each round. The same proctoring layer used for weekly checkpoints applies here.
+Uses `drive_banks.py` for company-specific question banks across four drives (Infosys, TCS, Wipro, Capgemini). Supports MCQ and open-ended questions. Grades on a per-dimension rubric and produces section breakdowns and drive benchmarks. The same proctoring layer as weekly checkpoints applies here.
 
 </details>
 
@@ -250,12 +251,14 @@ sequenceDiagram
 | Language | Python 3.11+ | |
 | Framework | FastAPI 0.115 | Async, SSE streaming |
 | Orchestration | LangGraph 0.2 | 5-node supervisor graph |
-| LLM | OpenAI GPT-4o-mini / Azure OpenAI | Swappable via config |
+| LLM | OpenAI GPT-4o-mini / Azure OpenAI | Swappable via `llm.py` |
 | ORM | SQLAlchemy 2.0 async | |
 | Database | SQLite (dev) / PostgreSQL (prod) | |
-| Auth | PyJWT + BCrypt | Bearer token, per-request |
-| Tracing | OpenTelemetry | Spans per agent step |
-| Spaced Rep | FSRS-4.5 | Revision deck scheduling |
+| Auth | PyJWT + BCrypt | Bearer token |
+| Spaced Rep | FSRS-4.5 | `fsrs_engine.py` |
+| Feasibility | Custom scorer | `feasibility.py` |
+| Narration | Template engine | `narration.py` |
+| Observability | OpenTelemetry | `tracing.py` |
 
 ### Frontend
 
@@ -281,8 +284,8 @@ sequenceDiagram
 ### 1. Clone
 
 ```bash
-git clone https://github.com/Monisha-1508/Capegemini_Skillsync.git
-cd Capegemini_Skillsync
+git clone https://github.com/Monisha-1508/SKILLSYNC_AI.git
+cd SKILLSYNC_AI
 ```
 
 ### 2. Backend
@@ -310,10 +313,14 @@ npm install
 
 ### 4. Environment
 
-Create `backend/.env`:
+Copy the example file and fill in values:
+
+```bash
+cp backend/.env.example backend/.env
+```
 
 ```env
-# "simulated" works fully offline - no API key needed
+# "simulated" works offline with no API key
 LLM_PROVIDER=simulated
 
 # OpenAI
@@ -339,18 +346,11 @@ cd backend
 uvicorn main:app --reload --port 8000
 ```
 
-**Terminal 2 - frontend (dev):**
+**Terminal 2 - frontend:**
 
 ```bash
 cd frontend
 npm run dev
-```
-
-**or production build:**
-
-```bash
-cd frontend
-npm run build && npm start
 ```
 
 ### 6. Open
@@ -370,7 +370,7 @@ Email    :  demo@skillsync.ai
 Password :  skillsync-demo
 ```
 
-Five pre-built personas (Aarav, Priya, Rohan, Sneha, Vikram) are on the onboarding screen if you want to skip the intake form and go straight to a populated dashboard.
+Five pre-built personas (Aarav, Priya, Rohan, Sneha, Vikram) are available on the onboarding screen to skip the intake form.
 
 ---
 
@@ -379,18 +379,11 @@ Five pre-built personas (Aarav, Priya, Rohan, Sneha, Vikram) are on the onboardi
 <details>
 <summary><strong>LLM provider options</strong></summary>
 
-| Value | What it does |
+| Value | Description |
 |:---|:---|
-| `simulated` | No API key needed. Returns deterministic mock responses. Good for dev/demo. |
-| `openai` | Uses OpenAI API. Needs `OPENAI_API_KEY`. |
-| `azure_openai` | Uses Azure OpenAI. Needs endpoint, key, and deployment name. |
-
-</details>
-
-<details>
-<summary><strong>Token usage</strong></summary>
-
-The profiling and roadmap agents use structured prompts with deterministic post-processing so the LLM handles reasoning, not formatting. Resource curation and validation run against a pre-scored corpus rather than live search, which keeps per-plan token cost low.
+| `simulated` | No API key needed. Deterministic mock responses. |
+| `openai` | OpenAI API. Needs `OPENAI_API_KEY`. |
+| `azure_openai` | Azure OpenAI. Needs endpoint, key, deployment. |
 
 </details>
 
@@ -398,10 +391,10 @@ The profiling and roadmap agents use structured prompts with deterministic post-
 <summary><strong>Database</strong></summary>
 
 ```env
-# SQLite - zero config, good for local dev
+# SQLite - zero config
 DATABASE_URL=sqlite+aiosqlite:///./data/skillsync.db
 
-# PostgreSQL - for production
+# PostgreSQL
 DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/skillsync
 ```
 
@@ -479,19 +472,17 @@ DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/skillsync
 
 ## Dashboard Panels
 
-Nine tabs, each focused on one part of the plan:
-
 | Tab | What you see |
 |:---|:---|
 | Overview | Summary cards, gamification bar, gap snapshot, validator sign-off |
-| Gap Map | Radar chart across 6 skill families, covered/developing/gap breakdown |
-| Roadmap | Week-by-week milestones, reflow indicators, feasibility score, re-plan controls |
-| Progress | Log each week as complete / partial / missed, trigger reflow on missed weeks |
-| Resources | Trust-scored cards per skill, locked until that week is unlocked |
+| Gap Map | Radar chart across 6 skill families, bucket breakdown |
+| Roadmap | Week-by-week milestones, reflow indicators, feasibility score |
+| Progress | Log each week complete / partial / missed, trigger reflow |
+| Resources | Trust-scored cards per skill, locked until week unlocked |
 | Revision | FSRS flashcard deck - flip and grade Again / Hard / Good / Easy |
-| Mock Interview | Pick drive and round, answer under a timer, read post-round report |
+| Mock Interview | Pick company drive and round, answer under timer, post-round report |
 | Checkpoint | Proctored weekly MCQ, learning recovery panel if retake gate fires |
-| Validation | Full validator report with timestamps and per-check status |
+| Validation | Full validator report with per-check status and timestamps |
 
 ---
 
@@ -500,12 +491,12 @@ Nine tabs, each focused on one part of the plan:
 ```bash
 cd backend
 
-# Windows PowerShell
-$env:PYTHONPATH = "C:\path\to\Capegemini_Skillsync"
+# Windows
+$env:PYTHONPATH = "C:\path\to\SKILLSYNC_AI"
 .venv\Scripts\python -m pytest tests/ -v
 
 # macOS / Linux
-export PYTHONPATH=/path/to/Capegemini_Skillsync
+export PYTHONPATH=/path/to/SKILLSYNC_AI
 .venv/bin/python -m pytest tests/ -v
 ```
 
@@ -526,7 +517,7 @@ tests/test_profiling_e2e.py::test_profiling_persona_cold_run[vikram]  PASSED
 ## Project Structure
 
 ```
-Capegemini_Skillsync/
+SKILLSYNC_AI/
 |
 +-- backend/
 |   +-- agents/
@@ -544,14 +535,18 @@ Capegemini_Skillsync/
 |   |
 |   +-- data/
 |   |   +-- skill_graph.json       41-node skill graph
+|   |   +-- skill_chains.py        Prerequisite chain definitions
 |   |   +-- resource_bank.py       Trust-scored resource corpus
+|   |   +-- drive_banks.py         Company-specific interview Q banks
+|   |   +-- company_profiles.json  Drive metadata (Infosys, TCS, Wipro, Capgemini)
 |   |   +-- project_bank.py        Role-tagged project suggestions
 |   |   +-- demo_personas.json     5 pre-built learner personas
-|   |   +-- golden_evals.json      Golden evaluation dataset
+|   |   +-- golden_eval.json       Golden evaluation dataset
 |   |
 |   +-- models/
 |   |   +-- database.py            SQLAlchemy async models
 |   |   +-- schemas.py             Pydantic schemas
+|   |   +-- state.py               LangGraph state TypedDict
 |   |
 |   +-- routers/
 |   |   +-- auth.py                JWT auth
@@ -563,13 +558,19 @@ Capegemini_Skillsync/
 |   |   +-- interview.py           Mock interview rounds
 |   |   +-- recovery.py            Learning recovery
 |   |   +-- explain.py             Skill/resource/replan explainer
+|   |   +-- deps.py                Shared FastAPI dependencies
 |   |
 |   +-- utils/
 |   |   +-- auth.py                Password hashing + JWT
+|   |   +-- feasibility.py         Roadmap feasibility scorer
+|   |   +-- fsrs_engine.py         FSRS-4.5 spaced repetition
 |   |   +-- gamification.py        Points, levels, badges
-|   |   +-- skill_graph.py         Graph traversal helpers
+|   |   +-- llm.py                 LLM abstraction layer
+|   |   +-- narration.py           Plan narration templates
+|   |   +-- persistence.py         DB read/write helpers
 |   |   +-- responsible_ai.py      Confidence + disclosure
 |   |   +-- seed.py                DB seeding + demo account
+|   |   +-- skill_graph.py         Graph traversal helpers
 |   |   +-- tracing.py             OpenTelemetry setup
 |   |
 |   +-- tests/
@@ -582,6 +583,7 @@ Capegemini_Skillsync/
 |   +-- src/
 |   |   +-- app/
 |   |   |   +-- page.js            Landing page
+|   |   |   +-- layout.js          Root layout
 |   |   |   +-- login/page.js      Login + register
 |   |   |   +-- onboarding/page.js Intake form + trace view
 |   |   |   +-- dashboard/page.js  Main dashboard, 9 tabs
@@ -591,15 +593,21 @@ Capegemini_Skillsync/
 |   |   |   +-- panels/            11 dashboard panel components
 |   |   |   +-- OnboardingTrace.js SSE trace display
 |   |   |   +-- GamificationReward.js Points + badges overlay
-|   |   |   +-- Celebration.js     Confetti / balloon animations
+|   |   |   +-- Celebration.js     Confetti + balloon animations
 |   |   |   +-- AlertBanner.js     Deadline alert strip
+|   |   |   +-- ui.js              Shared UI primitives
 |   |   |
 |   |   +-- lib/
-|   |       +-- api.js             Fetch wrapper + auth token
-|   |       +-- AuthContext.js     React auth state
+|   |   |   +-- api.js             Fetch wrapper + auth token
+|   |   |   +-- AuthContext.js     React auth state
+|   |   |   +-- cx.js              Class name utility
+|   |   |
+|   |   +-- styles/
+|   |       +-- globals.css        Tailwind base + custom animations
 |   |
 |   +-- tailwind.config.js         Brand color tokens
-|   +-- next.config.mjs            API proxy to port 8000
+|   +-- next.config.js             API proxy to port 8000
+|   +-- package.json
 |
 +-- .gitignore
 +-- README.md
@@ -609,33 +617,28 @@ Capegemini_Skillsync/
 
 ## Proctoring System
 
-Both the weekly checkpoints and mock interview rounds use the same anti-cheat layer.
+Both weekly checkpoints and mock interview rounds use the same anti-cheat layer.
 
 ```mermaid
 graph LR
-    subgraph PROCTOR["What gets tracked"]
+    subgraph TRACK["What gets tracked"]
         CP[Copy-paste attempts]
         TS[Tab switches - max 3]
         FS[Fullscreen exits]
         TM[Per-question timer]
     end
 
-    subgraph OUTCOME["What fires on violation"]
-        CP --> BLOCK[Celebration suppressed]
-        TS --> BLOCK
-        FS --> BLOCK
-        TM -->|timer hits zero| AUTO[Auto-submit]
-    end
+    CP -->|any attempt| BLOCK[Celebration suppressed]
+    TS -->|more than 3| BLOCK
+    FS -->|any exit| BLOCK
+    TM -->|hits zero| AUTO[Auto-submit]
 
     PASS[All clear] --> CELEB[Full celebration overlay]
 
-    style PROCTOR fill:#001E3C,color:#ffffff,stroke:#17ABDA
-    style OUTCOME fill:#0070AD,color:#ffffff,stroke:#001E3C
+    style TRACK fill:#001E3C,color:#ffffff,stroke:#17ABDA
     style CELEB fill:#38D9A9,color:#001E3C,stroke:#0070AD
     style BLOCK fill:#FF6B6B,color:#ffffff,stroke:#001E3C
 ```
-
-Copy-paste events, tab visibility changes, and fullscreen exits are all counted per sitting. If any flag fires, the celebration overlay (confetti/balloons) is withheld. The per-question timer auto-submits when it hits zero. None of this affects the score calculation - it only gates the reward animation.
 
 ---
 
@@ -643,11 +646,11 @@ Copy-paste events, tab visibility changes, and fullscreen exits are all counted 
 
 ```mermaid
 graph TD
-    AGT[Agent Step] -->|traced_step context manager| SPAN[OpenTelemetry Span]
+    AGT[Agent Step] -->|traced_step ctx manager| SPAN[OpenTelemetry Span]
     SPAN --> ATTR[agent_name, action, confidence, output_summary]
     ATTR --> AUDIT[AuditLog table]
-    AUDIT --> DASH[Dashboard - Audit Trail panel]
-    SPAN --> CONSOLE[Console exporter in dev mode]
+    AUDIT --> DASH[Dashboard Audit Trail panel]
+    SPAN --> CONSOLE[Console exporter - dev mode]
 
     style AGT fill:#0070AD,color:#ffffff
     style SPAN fill:#F5A800,color:#001E3C
@@ -655,7 +658,7 @@ graph TD
     style DASH fill:#17ABDA,color:#001E3C
 ```
 
-Every agent step wraps in a `traced_step` context manager that emits an OpenTelemetry span. The span carries the agent name, the action taken, a confidence score, and a short output summary. These are persisted to the `AuditLog` table and surfaced in the dashboard's Audit Trail panel so the full pipeline run is readable after the fact.
+Every agent step wraps in a `traced_step` context manager that emits an OpenTelemetry span. The span carries the agent name, action, confidence score, and output summary. These persist to the `AuditLog` table and surface in the dashboard's Audit Trail panel.
 
 ---
 
@@ -663,11 +666,9 @@ Every agent step wraps in a `traced_step` context manager that emits an OpenTele
 
 1. Fork the repo
 2. Create a branch: `git checkout -b feature/your-feature`
-3. Commit changes: `git commit -m 'Add your feature'`
+3. Commit: `git commit -m 'Add your feature'`
 4. Push: `git push origin feature/your-feature`
 5. Open a pull request
-
-Issues and feature requests go through GitHub Issues.
 
 ---
 
